@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:dottedcarasoulslider/dottedcarasoulslider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gym/web/bottom.dart';
 
 
 class home1 extends StatefulWidget {
@@ -12,6 +16,35 @@ class home1 extends StatefulWidget {
 
 class _home1State extends State<home1> {
 
+  List a =[];
+  
+  List b =[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    load();
+    load2();
+  }
+
+  Future<void> load()async{
+    String data = await rootBundle.loadString("assets/brand.json");
+    setState(() {
+      a = jsonDecode(data);
+    });
+  }
+
+  Future<void> load2()async{
+    String data2 = await rootBundle.loadString("assets/tranding.json");
+    setState(() {
+      b = jsonDecode(data2);
+    });
+  }
+
+
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -20,7 +53,7 @@ class _home1State extends State<home1> {
 
 
     return Scaffold(
-      appBar: AppBar(title: Image.asset("name"),
+      appBar: AppBar(title: Text("Beard & Muscle",style: TextStyle(color: Colors.white),),
 
       leading:Icon(Icons.menu,color: Colors.white,) ,
   backgroundColor: Colors.black,
@@ -36,70 +69,168 @@ class _home1State extends State<home1> {
         height: double.infinity,
         width: double.infinity,
 
-        child: Column(
-          children: [
-
-//Search Bar
-
-            Container(
-              height: 0.1*h,
-              width: 1*w,
-              decoration: BoxDecoration(color: Colors.black),
-              child: Text("Search",style: TextStyle(color: Colors.grey),),
-            ),
-
-
- //Banner
-
-          
-            // color: Colors.black,
-       Expanded(
-         child: SingleChildScrollView(
+        child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-           child: DottedCarasoulSlider(
-            showArrows: true,
-            showDots: true,
-            lefticon: Icons.abc,
-            righticon: Icons.access_time_filled_outlined,
-            autoplay: true,
-            reverse: false,
-            dotDirectionBottom: 0,
-            dotDirectionLeft: 0,
-            dotDirectionRight: 0,
-            dotDirectionTop: 0,
-            dotActiveColor: Colors.red,
-            dotInActiveColor: Colors.yellow,
-            iconColor: Colors.blue,
-            iconSize: 50,
-            imgUrls: const [
-              "https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg",
-              "https://static.vecteezy.com/system/resources/thumbnails/021/643/720/small/blurred-gym-background-created-with-generative-ai-photo.jpg",
-              "https://img.freepik.com/premium-photo/exercising-sport-gym-workout-exercise-training-fitness-body-strong-fit-bodybuilding-healthy-lifestyle-people-doing-exercise-sportive-club-dumbbell-exercise_887181-663.jpg",
-              "https://img.freepik.com/premium-photo/photo-people-exercising-gyms_883586-14166.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699833600&semt=ais",
-            ],
-            
-            duration: const Duration(seconds: 3),
-            height: 1*h,
-            fit: BoxFit.fill,
-            width: 1*w,
-            aspectRatio: 0.8,
-                 ),
-         ),
-       ),
+          child: Column(
+            children: [
           
+          
+          
+                SafeArea(
+                  child: Container(
+                    // margin: EdgeInsets.all(5),
+                    height: 180,
+                    width: 1*w,
+                    child: SingleChildScrollView(
+                      scrollDirection:Axis.horizontal,
+                      child: Row(
+                        children: [
+                         Container(
+                          width: 1*w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage("assets/one.jpg"),fit: BoxFit.cover)
+                          ),
+                         ),
+          
+                         Container(
+          
+                          width: 1*w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage("assets/two.png"),fit: BoxFit.cover)
+                          ),),
+                          Container(
+                          width: 1*w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage("assets/one.jpg"),fit: BoxFit.cover)
+                          ),
+                         ),
+                         Container(
+          
+                          width: 1*w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage("assets/two.png"),fit: BoxFit.cover)
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+          
+          
+                //Trending in Protein
+                Text("Trending in Protein",style: TextStyle(color: Colors.red,fontSize: 20),),
+          
+                 Container(
+                  height: 0.4*h,
+                  width: 1*w,
+                   child: Expanded(
+                                child: ListView.builder( 
+                                 itemCount: b.length,
+                                 scrollDirection: Axis.horizontal,
+                               
+                               itemBuilder: (BuildContext context, int index){
+                                 return Container(
+                    height: 300,
+                    width: 250,
+                    // color: Colors.yellow,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          height: 120,
+                          width: 120,
+                          child: Image.network(b[index]['img'].toString(),fit: BoxFit.fill,),
+                          
+                        ),
+                        Container(
+                          height: 20,
+                          width: 200,
+                          child: Text(b[index]['title'].toString()),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 90),
+                          height: 50,
+                          width: 200,
+                          child: Row(
+                            children: [
+                              Text('',style: TextStyle(fontSize: 20,color: Colors.red),),
+                              Text(b[index]['price'].toString(),style: TextStyle(color: Colors.red,fontSize: 20),),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 1,),
+                        
+                           ElevatedButton(
+                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
+                            onPressed: (){
+                          
+                          }, child: Text("   Add to Cart   ",style: TextStyle(color: Colors.white),)),
+                        
+                   
+                      ],
+                    ),
+                                 );
+                               }
+                                ),
+                              ),
+                 ),
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+                //Brands Section
+          
+                
+                SizedBox(height: 100,),          
+                 Container(
+          height: 1*h,
+          width: 1*w,
+           child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+            ),
+            itemCount: a.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GridTile(
+                child: Image.network(
+                  a[index]['img'],
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+                ),
+                 ),
+                
 
+                //Bottombar
 
+                Container(
+                  height: 400,
+                  width: 1*w,
+                  child: bottom(),
 
-//api calling
-
-
-      Container(
-        height: 0.2*h,
-        width: 1*w,
-        color: Colors.black,
-      ),
-
-          ],
+                ),
+               
+          
+          
+          
+               
+            ],
+          ),
         ),
       ),
 

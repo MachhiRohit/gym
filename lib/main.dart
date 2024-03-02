@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gym/Rohit/home3.dart';
 import 'package:gym/home.dart';
 import 'package:dottedcarasoulslider/dottedcarasoulslider.dart';
+import 'package:gym/web/View/home1.dart';
+
 
 void main() {
   runApp(const MyApp());

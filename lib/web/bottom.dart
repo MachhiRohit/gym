@@ -5,6 +5,10 @@ class bottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return Scaffold(
       
       body: Container(
@@ -14,30 +18,62 @@ class bottom extends StatelessWidget {
         child: Column(
           children: [
 
-            Text("Contact Us"),
-            Text("support@gmail.com"),
+            Row(
+              children: [
+                Container(
+                  height: 300,
+                  width: 0.5*w,
+                  child: Column(
+                    children: [
+
+            Text("Contact Us",style: TextStyle(color: Colors.white,fontSize: 20),),
+            Text("support@gmail.com",style: TextStyle(color: Colors.white,fontSize: 20)),
 
 
 
-            Text("CUSTOMER SERVICES"),
-            Text("Partner with SOS"),
-            Text("Store Locator"),
-            Text("REfund & Return"),
-            Text("Contact us"),
-            Text("Blogs"),
-            Text("FAQ"),
+ Text("INFORMATION",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("About us",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Certificates",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Privacy Policy",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Terms & Condtions",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Sold Out",style: TextStyle(color: Colors.white,fontSize: 20)),
+
+                      
+                    ],
+                  ),
+                ),
 
 
+               Container(
+                height: 300,
+                width: 0.5*w,
+                child: Column(
+                  children: [
 
-            Text("INFORMATION"),
-            Text("About us"),
-            Text("Certificates"),
-            Text("Privacy Policy"),
-            Text("Terms & Condtions"),
-            Text("Sold Out"),
+                      Text("CUSTOMER SERVICES",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Partner with SOS",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Store Locator",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("REfund & Return",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Contact us",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("Blogs",style: TextStyle(color: Colors.white,fontSize: 20)),
+            Text("FAQ",style: TextStyle(color: Colors.white,fontSize: 20)),
 
 
-            Text("@ Source of supplements")
+ Text("@ Source of supplements",style: TextStyle(color: Colors.white,fontSize: 20))
+                  ],
+                ),
+               ),
+              ],
+            ),
+
+           
+
+
+          
+
+           
+
+           
 
           ],
         ),
